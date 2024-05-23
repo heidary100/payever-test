@@ -1,14 +1,14 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { MongooseModule } from '@nestjs/mongoose';
-import { UserModule } from './user/user.module';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import type { DynamicModule, Type } from '@nestjs/common';
+import { UserController } from './handler/controllers/user.controller';
+import { UserService } from './application/user.service';
+import { APP_PIPE } from '@nestjs/core';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(process.env.MONGODB_URI),
-    UserModule,
     ClientsModule.register([
       {
         name: 'RABBITMQ_CLIENT',
@@ -23,5 +23,20 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       },
     ]),
   ],
+  controllers: [UserController],
+  providers: [
+    UserService,
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+  ],
 })
-export class AppModule {}
+export class AppModule {
+  static withDatabase(databaseModule: Type<any>): DynamicModule {
+    return {
+      module: AppModule,
+      imports: [databaseModule],
+    };
+  }
+}
