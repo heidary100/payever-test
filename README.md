@@ -58,16 +58,21 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Running the Application with Docker Compose
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+[Docker Compose](https://docs.docker.com/compose/) is a tool for defining and running multi-container Docker applications. It allows you to define the services, networks, and volumes in a single YAML file and then run them with a single command.
 
-## Stay in touch
+### Prerequisites
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Before running Docker Compose, ensure that you have Docker and Docker Compose installed on your machine. You can download and install Docker Desktop from the [official website](https://www.docker.com/products/docker-desktop).
 
-## License
+### Steps
 
-Nest is [MIT licensed](LICENSE).
+1. Navigate to the root directory of your project, where your `docker-compose.yml` file is located.
+
+2. Open a terminal or command prompt.
+
+3. Run the following command to build and start the Docker containers defined in your `docker-compose.yml` file:
+
+   ```bash
+   docker-compose up --build

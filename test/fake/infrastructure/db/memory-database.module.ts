@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MemoryUserRepository } from './memory.user.repository';
+import { MemoryAvatarRepository } from './memory.avatar.repository';
 
 @Module({
   providers: [
@@ -7,7 +8,11 @@ import { MemoryUserRepository } from './memory.user.repository';
       provide: 'UserRepositoryInterface',
       useClass: MemoryUserRepository,
     },
+    {
+      provide: 'AvatarRepositoryInterface',
+      useClass: MemoryAvatarRepository,
+    },
   ],
-  exports: ['UserRepositoryInterface'],
+  exports: ['UserRepositoryInterface', 'AvatarRepositoryInterface'],
 })
 export class MemoryDatabaseModule {}

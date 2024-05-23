@@ -83,28 +83,28 @@ export class UserService {
     try {
       fs.unlinkSync(filePath);
     } catch (error) {
-      console.error('Error removing avatar file:', error);
+      // console.error('Error removing avatar file:', error);
     }
 
     await this.avatarRepository.deleteById(userId);
   }
 
-  private async fetchUserData(userId: string): Promise<any> {
+  async fetchUserData(userId: string): Promise<any> {
     try {
       const response = await axios.get(`https://reqres.in/api/users/${userId}`);
       return response.data.data;
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      // console.error('Error fetching user data:', error);
       return null;
     }
   }
 
-  private async downloadImage(url: string): Promise<Buffer> {
+  async downloadImage(url: string): Promise<Buffer> {
     try {
       const response = await axios.get(url, { responseType: 'arraybuffer' });
       return Buffer.from(response.data, 'binary');
     } catch (error) {
-      console.error('Error downloading image:', error);
+      // console.error('Error downloading image:', error);
       return null;
     }
   }

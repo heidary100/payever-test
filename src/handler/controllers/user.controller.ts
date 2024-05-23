@@ -41,14 +41,6 @@ export class UserController {
     });
   }
 
-  // @Get('user/:userId')
-  // @ApiOperation({ summary: 'Retrieves User data from reqres' })
-  // @ApiResponse({ status: 200, description: 'User retrieved successfully' })
-  // async getUser(@Param('userId') userId: string) {
-  //   return 'hellpo' + userId;
-  //   // return await this.userService.getUser(userId);
-  // }
-
   @Get('user/:userId/avatar')
   async getUserAvatar(@Param('userId') userId: string) {
     return await this.userService.getUserAvatar(userId);
