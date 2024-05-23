@@ -1,25 +1,29 @@
-// user.service.spec.ts
+// user.repository.spec.ts
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserService } from './user.service';
 import { UserRepository } from './user.repository';
+import { getModelToken } from '@nestjs/mongoose';
+import { User } from './schemas/user.schema';
 
-describe('UserService', () => {
-  let service: UserService;
+describe('UserRepository', () => {
   let repository: UserRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [UserService, UserRepository],
+      providers: [
+        UserRepository,
+        {
+          provide: getModelToken(User.name),
+          useValue: {},
+        },
+      ],
     }).compile();
 
-    service = module.get<UserService>(UserService);
     repository = module.get<UserRepository>(UserRepository);
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
     expect(repository).toBeDefined();
   });
 
-  // Add more test cases for service methods
+  // Add more test cases for repository methods
 });
