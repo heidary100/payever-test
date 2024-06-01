@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User as UserDomain } from 'src/domain/user';
+import { User as UserDomain } from '../../../domain/user';
 import { User } from '../schemas/user.schema';
 
 @Injectable()
