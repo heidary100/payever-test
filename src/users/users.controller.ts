@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Controller,
   Post,
@@ -8,7 +9,7 @@ import {
   Get,
   Delete,
 } from '@nestjs/common';
-import { UserService } from '../../application/user.service';
+import { UsersService } from './users.service';
 import {
   ApiTags,
   ApiOperation,
@@ -16,13 +17,13 @@ import {
   ApiBadRequestResponse,
   ApiNotFoundResponse,
   ApiNoContentResponse,
-} from '@nestjs/swagger'; 
-import { CreateUserDto } from './resources/incoming/create-user.dto';
+} from '@nestjs/swagger';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @ApiTags('users')
 @Controller('api')
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+export class UsersController {
+  constructor(private readonly userService: UsersService) {}
 
   @Post('users')
   @HttpCode(HttpStatus.CREATED)
@@ -37,10 +38,7 @@ export class UserController {
     description: 'Bad request, wrong parameterization.',
   })
   async createUser(@Body() createUserDto: CreateUserDto) {
-    return await this.userService.createUser({
-      name: createUserDto.name,
-      email: createUserDto.email,
-    });
+    return this.userService.createUser(createUserDto);
   }
 
   @Get('user/:userId')
@@ -52,7 +50,7 @@ export class UserController {
     description: 'User with specified ID not found.',
   })
   async getUser(@Param('userId') userId: string) {
-    return await this.userService.getUser(userId);
+    return this.userService.getUser(userId);
   }
 
   @Get('user/:userId/avatar')

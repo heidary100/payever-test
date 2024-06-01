@@ -1,5 +1,5 @@
 import { UserRepositoryInterface } from '../../../../src/domain/interface/user.repository.interface';
-import { User } from '../../../../src/domain/user';
+import { User } from '../../../../src/users/entities/user';
 import { UserBuilder } from '../../../builder/domain/user.builder';
 
 export class MemoryUserRepository implements UserRepositoryInterface {

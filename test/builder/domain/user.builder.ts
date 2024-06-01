@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { User } from '../../../src/domain/user';
+import { User } from '../../../src/users/entities/user';
 
 interface UserBuilderProperties {
   id: string;

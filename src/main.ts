@@ -1,11 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { DatabaseModule } from './infrastructure/db/database.module';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule.withDatabase(DatabaseModule));
+  const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
     .setTitle('Simple nestjs rest api')
     .setDescription('The cats API description')

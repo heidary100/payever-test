@@ -1,9 +1,8 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import type { DynamicModule, Type } from '@nestjs/common';
-import { UserController } from './handler/controllers/user.controller';
-import { UserService } from './application/user.service';
+import { UsersController } from './users/users.controller';
+import { UsersService } from './users/users.service';
 import { APP_PIPE } from '@nestjs/core';
 
 @Module({
@@ -23,20 +22,13 @@ import { APP_PIPE } from '@nestjs/core';
       },
     ]),
   ],
-  controllers: [UserController],
+  controllers: [UsersController],
   providers: [
-    UserService,
+    UsersService,
     {
       provide: APP_PIPE,
       useClass: ValidationPipe,
     },
   ],
 })
-export class AppModule {
-  static withDatabase(databaseModule: Type<any>): DynamicModule {
-    return {
-      module: AppModule,
-      imports: [databaseModule],
-    };
-  }
-}
+export class AppModule {}

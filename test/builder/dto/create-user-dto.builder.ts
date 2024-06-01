@@ -1,4 +1,4 @@
-import { CreateUserDto } from 'src/handler/controllers/resources/incoming/create-user.dto';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
 
 export class CreateUserDtoBuilder {
   private properties: CreateUserDto = {
